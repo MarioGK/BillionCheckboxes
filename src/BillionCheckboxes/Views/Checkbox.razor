@@ -1,0 +1,14 @@
+<input
+    id="@CheckboxModel.Id"
+    type="checkbox" 
+    data-on-change="@@post('/checkbox/@CheckboxModel.Id')" 
+    class="checkbox"
+    data-bind-boxes
+    value="@(CheckboxModel.Value)"
+/>
+
+@code {
+    [Parameter] 
+    [EditorRequired]
+    public required CheckBoxModel CheckboxModel { get; set; }
+}
