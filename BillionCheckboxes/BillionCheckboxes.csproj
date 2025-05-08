@@ -19,6 +19,9 @@
       <Content Include="..\.dockerignore">
         <Link>.dockerignore</Link>
       </Content>
+      <Content Include="..\.gitignore">
+        <Link>.gitignore</Link>
+      </Content>
     </ItemGroup>
 
     <ItemGroup>
