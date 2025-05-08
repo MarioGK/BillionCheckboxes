@@ -4,18 +4,18 @@ namespace BillionCheckboxes.Models;
 
 public record CheckboxesModel
 {
-    public required int StartId { get; init; }
-    public required int Amount { get; init; }
+    public required int Offset { get; init; }
+    public required int Limit { get; init; }
     
-    public int TotalCheckboxes => StartId + Amount;
+    public int TotalCheckboxes => Offset + Limit;
 
     public HashSet<int> CheckedIds { get; init; } = [];
     
     public string ToSignal()
     {
         var stringBuilder = new StringBuilder();
-        stringBuilder.Append("{\'boxes\':[");
-        for (int i = StartId; i < TotalCheckboxes; i++)
+        stringBuilder.Append("{\'_boxes\':[");
+        for (var i = Offset; i < TotalCheckboxes; i++)
         {
             stringBuilder.Append(CheckedIds.Contains(i) ? "true," : "false,");
         }

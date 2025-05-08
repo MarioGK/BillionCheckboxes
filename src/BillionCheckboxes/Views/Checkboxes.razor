@@ -1,31 +1,22 @@
-@using System.Text
 <div id="checkboxes"
-     data-signals-boxes="[]">
-
-    @for (var i = CheckboxesModel.StartId; i < CheckboxesModel.TotalCheckboxes; i++)
+     
+     data-signals="{'offset':@CheckboxesModel.Offset, 'limit':@CheckboxesModel.Limit, '_boxes':[]}"
+>
+    @for (var i = CheckboxesModel.Offset; i < CheckboxesModel.TotalCheckboxes; i++)
     {
         <Checkbox CheckboxModel="new CheckBoxModel {Id = i, Value= CheckboxesModel.CheckedIds.Contains(i)}"></Checkbox>
     }
+
+    <div id="loading_message" class="alert alert-info"
+         data-on-intersect="$offset=@CheckboxesModel.Offset;$limit=@CheckboxesModel.Limit;@@get('/checkbox/pagination')">
+        <iconify-icon icon="svg-spinners:blocks-wave" noobserver=""></iconify-icon>
+        Loading...
+    </div>
 </div>
 
 @code {
+
+    //     data-signals-boxes="[]"
     //data-on-load="@@get('/checkbox')"
-    [Parameter] 
-    [EditorRequired]
-    public required CheckboxesModel CheckboxesModel { get; set; }
-
-    private string InitialData
-    {
-        get
-        {
-            var stringBuilder = new StringBuilder();
-            for (var i = CheckboxesModel.StartId; i < CheckboxesModel.TotalCheckboxes; i++)
-            {
-                stringBuilder.Append(CheckboxesModel.CheckedIds.Contains(i) ? "true," : "false,");
-            }
-            
-            return stringBuilder.ToString()[..^1];
-        }
-    }
-
+    [Parameter] [EditorRequired] public required CheckboxesModel CheckboxesModel { get; set; }
 }

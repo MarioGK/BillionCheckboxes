@@ -6,24 +6,24 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="color-scheme" content="light dark">
     <link rel="stylesheet" href="css/pico.classless.amber.min.css">
-    <script type="module" src="lib/datastar/datastar.old.js" asp-append-version="true"></script>
-    <title>Hello world!</title>
+    <script type="module" src="lib/datastar/datastar.rc.js" asp-append-version="true"></script>
+    <title>Billion checkboxes</title>
 </head>
 <body>
 <header>
-    Header!
-</header>
-<main>
-    <div id="checkboxes"
-         data-on-load="@@get('/checkbox')"
-         data-signals-boxes="[]">
-        Loading...
-    </div>
+    Hello there, welcome to the Billion Checkboxes demo using DataStar, ASP.Net Blazor with Minimal API and hosted in Fly.io.
+    Using ZoneTree as the persistant storage engine.
     
     <pre 
     id="sigs" 
-    data-on-signal-change="document.getElementById('sigs').textContent = ctx.signals.JSON()"
-></pre>
+    data-on-signal-change="document.getElementById('sigs').textContent = ctx.signals.JSON()"></pre>
+</header>
+<main>
+    <div id="checkboxes"
+         data-on-load="@@get('/checkbox/sse')"
+         data-signals="{'_boxes' = []}">
+        Loading...
+    </div>
 </main>
 </body>
 </html>
