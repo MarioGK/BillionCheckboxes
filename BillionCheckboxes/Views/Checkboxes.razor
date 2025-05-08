@@ -1,0 +1,31 @@
+@using System.Text
+<div id="checkboxes"
+     data-signals-boxes="[]">
+
+    @for (var i = CheckboxesModel.StartId; i < CheckboxesModel.TotalCheckboxes; i++)
+    {
+        <Checkbox CheckboxModel="new CheckBoxModel {Id = i, Value= CheckboxesModel.CheckedIds.Contains(i)}"></Checkbox>
+    }
+</div>
+
+@code {
+    //data-on-load="@@get('/checkbox')"
+    [Parameter] 
+    [EditorRequired]
+    public required CheckboxesModel CheckboxesModel { get; set; }
+
+    private string InitialData
+    {
+        get
+        {
+            var stringBuilder = new StringBuilder();
+            for (var i = CheckboxesModel.StartId; i < CheckboxesModel.TotalCheckboxes; i++)
+            {
+                stringBuilder.Append(CheckboxesModel.CheckedIds.Contains(i) ? "true," : "false,");
+            }
+            
+            return stringBuilder.ToString()[..^1];
+        }
+    }
+
+}
