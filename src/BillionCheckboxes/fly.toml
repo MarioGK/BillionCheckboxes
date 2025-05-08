@@ -1,0 +1,30 @@
+# fly.toml app configuration file generated for billioncheckboxes on 2025-05-08T15:42:59+01:00
+#
+# See https://fly.io/docs/reference/configuration/ for information about how to use this file.
+#
+
+app = 'billioncheckboxes'
+primary_region = 'cdg'
+
+[build]
+  build-target = 'final'
+
+[[mounts]]
+  source = 'db'
+  destination = '/app/db'
+  initial_size = '10GB'
+  auto_extend_size_threshold = 85
+  auto_extend_size_increment = '1GB'
+  auto_extend_size_limit = '50GB'
+
+[http_service]
+  internal_port = 8080
+  force_https = true
+  auto_stop_machines = 'stop'
+  auto_start_machines = true
+  min_machines_running = 0
+
+[[vm]]
+  memory = '512mb'
+  cpu_kind = 'shared'
+  cpus = 1

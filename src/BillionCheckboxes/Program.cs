@@ -28,8 +28,6 @@ var app = builder.Build();
 var loggerFactory = app.Services.GetRequiredService<ILoggerFactory>();
 var htmlRenderer = new HtmlRenderer(app.Services, loggerFactory);
 
-app.UseHttpsRedirection();
-
 app.MapStaticAssets();
 
 //Setup litedb
@@ -166,7 +164,7 @@ app.MapPost("/checkbox/{id:int}", async (int id, HttpContext httpContext) =>
 {
     var streamReader = new StreamReader(httpContext.Request.Body);
     var body = await streamReader.ReadToEndAsync();
-    body = body.Replace("\"\"", "false");
+    //body = body.Replace("\"\"", "false");
     
     //Why??
     var bodyJson = body.Replace("true", "\"true\"").Replace("false", "\"false\"");
